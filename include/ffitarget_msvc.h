@@ -38,10 +38,16 @@
 #ifndef LIBFFI_ASM
 #ifndef _WIN64
 typedef unsigned long          ffi_arg;
-#else
-typedef unsigned __int64       ffi_arg;
-#endif
 typedef signed long            ffi_sarg;
+#else
+#ifdef _MSC_VER
+typedef unsigned __int64       ffi_arg;
+typedef __int64                ffi_sarg;
+#else
+typedef unsigned long long     ffi_arg;
+typedef long long              ffi_sarg;
+#endif
+#endif
 
 typedef enum ffi_abi {
   FFI_FIRST_ABI = 0,

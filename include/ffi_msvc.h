@@ -85,6 +85,18 @@ extern "C" {
 # endif
 #endif
 
+/* The closure code assumes that this works on pointers, i.e. a size_t  */
+/* can hold a pointer.              */
+
+typedef struct _ffi_type
+{
+  size_t size;
+  unsigned short alignment;
+  unsigned short type;
+  /*@null@*/ struct _ffi_type **elements;
+} ffi_type;
+
+#ifndef LIBFFI_HIDE_BASIC_TYPES
 #if SCHAR_MAX == 127
 # define ffi_type_uchar                ffi_type_uint8
 # define ffi_type_schar                ffi_type_sint8
@@ -125,17 +137,6 @@ extern "C" {
  #error "long size not supported"
 #endif
 
-/* The closure code assumes that this works on pointers, i.e. a size_t	*/
-/* can hold a pointer.							*/
-
-typedef struct _ffi_type
-{
-  size_t size;
-  unsigned short alignment;
-  unsigned short type;
-  /*@null@*/ struct _ffi_type **elements;
-} ffi_type;
-
 /* These are defined in types.c */
 extern ffi_type ffi_type_void;
 extern ffi_type ffi_type_uint8;
@@ -148,8 +149,9 @@ extern ffi_type ffi_type_uint64;
 extern ffi_type ffi_type_sint64;
 extern ffi_type ffi_type_float;
 extern ffi_type ffi_type_double;
-extern ffi_type ffi_type_longdouble;
 extern ffi_type ffi_type_pointer;
+
+#endif /* LIBFFI_HIDE_BASIC_TYPES */
 
 
 typedef enum {
@@ -292,11 +294,6 @@ ffi_call(/*@dependent@*/ ffi_cif *cif,
 #define FFI_TYPE_INT        1
 #define FFI_TYPE_FLOAT      2    
 #define FFI_TYPE_DOUBLE     3
-#if 1
-#define FFI_TYPE_LONGDOUBLE 4
-#else
-#define FFI_TYPE_LONGDOUBLE FFI_TYPE_DOUBLE
-#endif
 #define FFI_TYPE_UINT8      5   
 #define FFI_TYPE_SINT8      6
 #define FFI_TYPE_UINT16     7 

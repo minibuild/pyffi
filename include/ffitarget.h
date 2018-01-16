@@ -1,9 +1,5 @@
 #if defined(_WIN32)
-#  if defined(_MSC_VER) 
-#    include <ffitarget_msvc.h>
-#  else
-#    include <ffitarget_x86.h>
-#  endif
+#  include <ffitarget_msvc.h>
 #elif defined(__linux__)
 #  if defined(__x86_64__) || defined(__i386__)
 #    include <ffitarget_x86.h>

@@ -1,17 +1,5 @@
 #if defined(_WIN32)
-#  if defined(_WIN64)
-#    if defined(_MSC_VER)
-#      include <fficonfig_msvc.h>
-#    else
-#      include <fficonfig_mingw64.h>
-#    endif
-#  else
-#    if defined(_MSC_VER)
-#      include <fficonfig_msvc.h>
-#    else
-#      include <fficonfig_mingw32.h>
-#    endif
-#  endif
+#  include <fficonfig_msvc.h>
 #elif defined(__linux__)
 #  if defined(__x86_64__)
 #    include <fficonfig_linux_x86_64.h>
