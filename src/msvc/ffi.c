@@ -155,7 +155,6 @@ ffi_status ffi_prep_cif_machdep(ffi_cif *cif)
     case FFI_TYPE_SINT64:
     case FFI_TYPE_FLOAT:
     case FFI_TYPE_DOUBLE:
-    case FFI_TYPE_LONGDOUBLE:
       cif->flags = (unsigned) cif->rtype->type;
       break;
 
@@ -325,10 +324,6 @@ ffi_closure_SYSV (ffi_closure *closure, char *argp)
 	    _asm fld QWORD PTR [eax] ;
 //      asm ("fldl (%0)" : : "r" (resp) : "st", "st(1)" );
     }
-  else if (rtype == FFI_TYPE_LONGDOUBLE)
-    {
-//      asm ("fldt (%0)" : : "r" (resp) : "st", "st(1)" );
-    }
   else if (rtype == FFI_TYPE_SINT64)
     {
 	    _asm mov edx, resp ;
@@ -352,10 +347,6 @@ ffi_closure_SYSV (ffi_closure *closure, char *argp)
   else if (rtype == FFI_TYPE_DOUBLE)
     {
       asm ("fldl (%0)" : : "r" (resp) : "st", "st(1)" );
-    }
-  else if (rtype == FFI_TYPE_LONGDOUBLE)
-    {
-      asm ("fldt (%0)" : : "r" (resp) : "st", "st(1)" );
     }
   else if (rtype == FFI_TYPE_SINT64)
     {

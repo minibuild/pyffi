@@ -48,15 +48,6 @@
 /* Define if mmap with MAP_ANON(YMOUS) works. */
 //#define HAVE_MMAP_ANON 1
 
-/* The number of bytes in type double */
-#define SIZEOF_DOUBLE 8
-
-/* The number of bytes in type long double */
-#define SIZEOF_LONG_DOUBLE 12
-
-/* Define if you have the long double type and it is bigger than a double */
-#define HAVE_LONG_DOUBLE 1
-
 /* whether byteorder is bigendian */
 /* #undef WORDS_BIGENDIAN */
 
